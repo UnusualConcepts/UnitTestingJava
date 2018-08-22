@@ -1,4 +1,4 @@
-package com.ssg.casino.domain;
+package com.uc.casino.domain;
 
 import org.junit.Test;
 

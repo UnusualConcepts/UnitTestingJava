@@ -1,4 +1,4 @@
-package com.ssg.casino.domain;
+package com.uc.casino.domain;
 
 public class Player {
     private RollDiceGame activeGame;
