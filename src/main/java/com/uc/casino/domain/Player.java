@@ -1,8 +1,13 @@
-package com.ssg.casino.domain;
+package com.uc.casino.domain;
 
 public class Player {
     private RollDiceGame activeGame;
     private int chips;
+    private Casino casino;
+
+    public Player(Casino casino) {
+        this.casino = casino;
+    }
 
     public RollDiceGame activeGame() {
         return activeGame;
@@ -17,10 +22,15 @@ public class Player {
     }
 
     public void joins(RollDiceGame game) throws CasinoGameException {
+
+        if(game.isFull()) {
+            throw new CasinoGameException("Number of players exceeded");
+        }
+
         if (isInGame()) {
             throw new CasinoGameException("Player must leave the current game before joining another game");
         }
-
+        game.addPlayer();
         activeGame = game;
     }
 
@@ -34,15 +44,20 @@ public class Player {
             throw new CasinoGameException("Buying negative numbers is not allowed");
         }
 
-        this.chips += chips;
+        this.chips = casino.sell(chips);
     }
 
     public void bet(Bet bet) throws CasinoGameException {
-        if (bet.getAmount() > this.chips) {
+
+        if(activeGame == null) {
+            throw new CasinoGameException("You must join game to make bet");
+        }
+
+        if (bet.getAmount() > chips) {
             throw new CasinoGameException("Can not bet more than chips available");
         }
 
-        this.chips -= bet.getAmount();
+        chips -= bet.getAmount();
         activeGame.addBet(this, bet);
     }
 
@@ -52,4 +67,5 @@ public class Player {
 
     public void lose() {
     }
+
 }

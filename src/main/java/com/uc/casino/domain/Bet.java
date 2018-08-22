@@ -1,4 +1,4 @@
-package com.ssg.casino.domain;
+package com.uc.casino.domain;
 
 public class Bet {
     private int amount;
@@ -15,5 +15,9 @@ public class Bet {
 
     public int getScore() {
         return score;
+    }
+
+    public String toString() {
+        return "Bet(" + amount + ", " + score + ")";
     }
 }
