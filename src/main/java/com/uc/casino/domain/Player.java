@@ -25,6 +25,10 @@ public class Player {
     }
 
     public void leave() throws CasinoGameException {
+        if (!isInGame()) {
+            throw new CasinoGameException("Can't leave if not in game");
+        }
+
         activeGame.leave(this);
         activeGame = null;
     }
@@ -38,11 +42,11 @@ public class Player {
     }
 
     public void bet(Bet bet) throws CasinoGameException {
-        if (bet.getAmount() > this.chips) {
+        if (bet.getAmount() > chips) {
             throw new CasinoGameException("Can not bet more than chips available");
         }
 
-        this.chips -= bet.getAmount();
+        chips -= bet.getAmount();
         activeGame.addBet(this, bet);
     }
 
