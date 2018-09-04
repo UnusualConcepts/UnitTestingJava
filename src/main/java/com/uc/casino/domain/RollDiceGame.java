@@ -4,6 +4,16 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class RollDiceGame {
+    private Dice dice;
+
+    public RollDiceGame() {
+
+    }
+
+    public RollDiceGame(Dice dice) {
+        this.dice = dice;
+    }
+
     private HashMap<Player, Bet> playersBets = new HashMap<Player, Bet>();
     private int playerCounter = 0;
 
@@ -12,8 +22,7 @@ public class RollDiceGame {
     }
 
     public void play() throws CasinoGameException {
-        Random random = new Random();
-        int winningScore = random.nextInt(6) + 1;
+        int winningScore = dice.getWinningScore();
 
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);
@@ -23,6 +32,7 @@ public class RollDiceGame {
                 player.lose();
             }
         }
+
         playersBets.clear();
     }
 
