@@ -18,7 +18,7 @@ public class GameTest {
 
         RollDiceGame game = new RollDiceGame(stubDice);
 
-        Player player = mock(Player.class);
+        Player player = spy(Player.class);
 
         game.addBet(player, new Bet(1,2));
 
