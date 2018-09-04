@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class RollDiceGame {
     private HashMap<Player, Bet> playersBets = new HashMap<Player, Bet>();
+    private int playerCounter = 0;
 
     public void addBet(Player player, Bet bet) {
         playersBets.put(player, bet);
@@ -31,5 +32,13 @@ public class RollDiceGame {
         }
 
         playersBets.remove(player);
+    }
+
+    public void addPlayer(Player player) throws CasinoGameException {
+        if (playerCounter >= 6) {
+            throw new CasinoGameException("Game is full!");
+        }
+
+        playerCounter++;
     }
 }

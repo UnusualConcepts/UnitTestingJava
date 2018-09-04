@@ -22,6 +22,7 @@ public class Player {
         }
 
         activeGame = game;
+        game.addPlayer(this);
     }
 
     public void leave() throws CasinoGameException {

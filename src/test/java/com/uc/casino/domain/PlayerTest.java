@@ -9,6 +9,22 @@ import static org.junit.Assert.*;
 public class PlayerTest {
 
     @Test
+    public void testJoins_shouldNotJoinMoreThanSixPlayers() throws CasinoGameException {
+
+        RollDiceGame game = new RollDiceGame();
+
+        for (int i = 0; i < 6; i++) {
+            Player player = new Player();
+            player.joins(game);
+        }
+
+        Player player = new Player();
+
+        thrown.expectMessage("Game is full!");
+        player.joins(game);
+    }
+
+    @Test
     public void testJoins_activeGameShouldBeNotNullAfterJoining() throws CasinoGameException {
         Player player = new Player();
         RollDiceGame game = new RollDiceGame();
